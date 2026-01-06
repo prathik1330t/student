@@ -10,7 +10,7 @@ def show_grade_criteria():
 
 def show_student_details():
     print("--- Student Details ---")
-    print("Name: NIKHIL")
+    print("Name: Prathik")
     print("Department: BCA")
     print("Semester: 3\n")
 
