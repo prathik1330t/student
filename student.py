@@ -32,14 +32,22 @@ def main():
     show_grade_criteria()
 
     print("\n--- Enter Student Details ---")
-    name = input("Enter Student Name: ")
-    department = input("Enter Department: ")
-    semester = input("Enter Semester: ")
+    try:
+        name = input("Enter Student Name: ")
+        department = input("Enter Department: ")
+        semester = input("Enter Semester: ")
 
-    print("\n--- Enter Marks ---")
-    m1 = float(input("Enter Subject 1 Marks: "))
-    m2 = float(input("Enter Subject 2 Marks: "))
-    m3 = float(input("Enter Subject 3 Marks: "))
+        print("\n--- Enter Marks ---")
+        m1 = float(input("Enter Subject 1 Marks: "))
+        m2 = float(input("Enter Subject 2 Marks: "))
+        m3 = float(input("Enter Subject 3 Marks: "))
+
+    except EOFError:
+        # Default values for Docker / Jenkins (non-interactive mode)
+        name = "Prathik"
+        department = "BCA"
+        semester = "III"
+        m1, m2, m3 = 85, 90, 95
 
     avg = calculate_average(m1, m2, m3)
     grade = calculate_grade(avg)
