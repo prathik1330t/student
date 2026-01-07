@@ -1,3 +1,6 @@
+import sys
+
+
 def show_grade_criteria():
     print("\n--- Grade Criteria ---")
     print("90 - 100 : Grade S")
@@ -28,26 +31,31 @@ def calculate_grade(avg):
         return "F"
 
 
+def get_input(prompt, default=None):
+    try:
+        return input(prompt)
+    except EOFError:
+        return default
+
+
 def main():
     show_grade_criteria()
 
     print("\n--- Enter Student Details ---")
-    try:
-        name = input("Enter Student Name: ")
-        department = input("Enter Department: ")
-        semester = input("Enter Semester: ")
+
+    # CLI arguments for Jenkins / Docker
+    if len(sys.argv) == 7:
+        _, name, department, semester, m1, m2, m3 = sys.argv
+        m1, m2, m3 = float(m1), float(m2), float(m3)
+    else:
+        name = get_input("Enter Student Name: ", "Prathik")
+        department = get_input("Enter Department: ", "BCA")
+        semester = get_input("Enter Semester: ", "III")
 
         print("\n--- Enter Marks ---")
-        m1 = float(input("Enter Subject 1 Marks: "))
-        m2 = float(input("Enter Subject 2 Marks: "))
-        m3 = float(input("Enter Subject 3 Marks: "))
-
-    except EOFError:
-        # Default values for Docker / Jenkins (non-interactive mode)
-        name = "Prathik"
-        department = "BCA"
-        semester = "III"
-        m1, m2, m3 = 85, 90, 95
+        m1 = float(get_input("Enter Subject 1 Marks: ", 85))
+        m2 = float(get_input("Enter Subject 2 Marks: ", 90))
+        m3 = float(get_input("Enter Subject 3 Marks: ", 95))
 
     avg = calculate_average(m1, m2, m3)
     grade = calculate_grade(avg)
