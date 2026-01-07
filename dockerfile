@@ -12,4 +12,4 @@ RUN python -m pip install pytest
 COPY student.py .
 COPY test_student.py .
 
-CMD ["python","pytest", "student.py"]
+CMD ["pytest"]
