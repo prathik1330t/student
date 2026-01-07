@@ -8,4 +8,4 @@ RUN python -m pip install pytest
 COPY student.py .
 COPY test_student.py .
 
-CMD sh -c "echo '===== Docker Test =====' && pytest -v && python student.py"
+ENTRYPOINT ["sh", "-c", "echo '===== Docker Test =====' && pytest -v && python student.py \"$@\"", "--"]
