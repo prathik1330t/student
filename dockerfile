@@ -1,4 +1,15 @@
-FROM python:3.11
+FROM python:3.11-slim
+
 WORKDIR /student
-COPY . .                
-CMD ["python","student.py"]
+
+# Upgrade pip
+RUN python -m pip install --upgrade pip
+
+# INSTALL PYTEST (THIS IS THE MISSING PART)
+RUN python -m pip install pytest
+
+# Copy application files
+COPY student.py .
+COPY test_student.py .
+
+CMD ["python", "student.py"]
